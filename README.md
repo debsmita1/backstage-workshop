@@ -14,7 +14,7 @@
 - Create Token: `kubectl create token backstage-sa -n backstage-workshop`
 - Create a Cluster Role: `kubectl apply -f ./backstage-cr.yaml`
 - Create a Cluster Role Binding: `kubectl apply -f ./backstage-crb.yaml`
-- Copy the Token in the kubernetes -> clusters -> service account token in the app-config.local.yaml
+- Add the Token in the environment variables `export K8S_MINIKUBE_TOKEN=<token>` [Perform this from the VSCode terminal]
 - Copy the Kubernetes control plane info in the kubernetes -> clusters -> url
 
 app-config.local.yaml
@@ -31,5 +31,5 @@ kubernetes:
         authProvider: 'serviceAccount'
         skipTLSVerify: true
         skipMetricsLookup: true
-        serviceAccountToken: <token>
+        serviceAccountToken: ${K8S_MINIKUBE_TOKEN}
 
