@@ -13,10 +13,8 @@ spec:
   template:
     metadata:
       name: openshift-app
-      creationTimestamp: null
       labels:
         backstage.io/kubernetes-id: test-backstage
-        k8s-app: openshift-app
     spec:
       containers:
         - name: openshift-app
