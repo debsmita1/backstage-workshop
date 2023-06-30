@@ -1,0 +1,16 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: test-backstage
+  labels: 
+    component: backstage-workloads
+  annotations:
+    #github.com/project-slug: debsmita1/app-1
+    quay.io/repository-slug: janus-idp/backstage-showcase
+    backstage.io/kubernetes-id: test-backstage
+    janus-idp.io/tekton-enabled: 'true'
+    #dev.azure.com/project-repo: my-project/my-repo
+spec:
+  type: service
+  lifecycle: unknown
+  owner: temp-d
