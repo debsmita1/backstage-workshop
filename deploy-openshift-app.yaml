@@ -1,0 +1,41 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: openshift-app
+  namespace: backstage-workshop
+  labels:
+    backstage.io/kubernetes-id: test-backstage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: openshift-app
+  template:
+    metadata:
+      name: openshift-app
+      creationTimestamp: null
+      labels:
+        backstage.io/kubernetes-id: test-backstage
+        k8s-app: openshift-app
+    spec:
+      containers:
+        - name: openshift-app
+          image: openshift/hello-openshift
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+          securityContext:
+            privileged: false
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
