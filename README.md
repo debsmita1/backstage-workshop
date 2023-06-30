@@ -10,8 +10,8 @@
 
 **Configure K8s integration:**
 - Create a namespace: 
-- Create Service Account: `kubectl create serviceaccount backstage-sa -n <namespace>`
-- Create Token: `kubectl create token backstage-sa -n <namespace>`
+- Create Service Account: `kubectl create serviceaccount backstage-sa -n backstage-workshop`
+- Create Token: `kubectl create token backstage-sa -n backstage-workshop`
 - Create a Cluster Role: `kubectl apply -f ./backstage-cr.yaml`
 - Create a Cluster Role Binding: `kubectl apply -f ./backstage-crb.yaml`
 - 
