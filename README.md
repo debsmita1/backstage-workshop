@@ -1,10 +1,17 @@
 # Backstage Workshop
 
-**Minikube Setup:**
+**Prerequisites to run Backstage locally:**
+- Node.js
+- [yarn](https://classic.yarnpkg.com/en/docs/install#mac-stable)
+- [docker](https://docs.docker.com/engine/install/)
+
+**Setup Minikube:**
 - Install [Minikube](https://minikube.sigs.k8s.io/docs/start/)
-- Start the [Docker desktop](https://docs.docker.com/desktop/install/mac-install/)
-- minikube start --driver=docker
-- minikube config set driver docker
+- Start the Docker desktop
+- To start the minikube run:
+ 
+     minikube start --driver=docker
+  
 - kubectl cluster-info [This will give the Kubernetes control plane info]
 - minikube dashboard [To view the Minikube dashboard]
 
