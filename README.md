@@ -13,7 +13,7 @@
 - To view the Minikube dashboard, run: `minikube dashboard`
 
 **Configure K8s integration:**
-- Create a namespace: `kubectl create namespace backstage-worskshop`
+- Create a namespace: `kubectl create namespace backstage-workshop`
 - Create Service Account: `kubectl create serviceaccount backstage-sa -n backstage-workshop`
 - Create Token: `kubectl create token backstage-sa -n backstage-workshop`
 - Create a Cluster Role: `kubectl apply -f ./backstage-cr.yaml`
