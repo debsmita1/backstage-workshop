@@ -8,12 +8,9 @@
 **Setup Minikube:**
 - Install [Minikube](https://minikube.sigs.k8s.io/docs/start/)
 - Start the Docker desktop
-- To start the minikube run:
- 
-     minikube start --driver=docker
-  
-- kubectl cluster-info [This will give the Kubernetes control plane info]
-- minikube dashboard [To view the Minikube dashboard]
+- To start the minikube, run: `minikube start --driver=docker`
+- To get the Kubernetes control plane info, run: `kubectl cluster-info`
+- To view the Minikube dashboard, run: `minikube dashboard`
 
 **Configure K8s integration:**
 - Create a namespace: `kubectl create namespace backstage-worskshop`
