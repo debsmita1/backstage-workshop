@@ -13,10 +13,12 @@
 - [git](https://github.com/git-guides/install-git)
 - [postgresql](https://www.postgresql.org/download/)
 - [psql](https://www.timescale.com/blog/how-to-install-psql-on-mac-ubuntu-debian-windows/) 
+- [minikube](https://minikube.sigs.k8s.io/docs/start/)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/)
 
 ### Backstage Installation ([Backstage getting started guide](https://backstage.io/docs/getting-started/#create-your-backstage-app))
 
-- Execute the command below to set-up an instance of Backstage in your local
+- Execute the following command to set-up an instance of Backstage in your local
 ```
 npx @backstage/create-app@latest
 ```
@@ -25,7 +27,7 @@ npx @backstage/create-app@latest
 
 - Once the installation is successful navitage to your backstage folder
 
-- Execute the steps below to start the app
+- Execute the following steps to start the app
 ```
 cd <backstage-folder>
 yarn dev
@@ -39,7 +41,7 @@ yarn dev
 yarn add --cwd packages/backend pg
 ```
 
-- export the below environment variables
+- export the following environment variables
 ```
 export POSTGRES_HOST=<your-postgres-host-name>
 ```
@@ -54,7 +56,7 @@ export POSTGRES_PASSWORD=<your-postgres-password>
 ```
 
 
-- Add the snippet below in the `app-config.local.yaml` file to configure your database
+- Add the following snippet in the `app-config.local.yaml` file to configure your database
 ```
 backend:
   ...
@@ -84,7 +86,7 @@ yarn dev
 export GITHUB_TOKEN=<your-github-token>
 ```
 
-- Add the snippet below in the `app-config.local.yaml` file
+- Add the following snippet in the `app-config.local.yaml` file
 
 ```
 integrations:
