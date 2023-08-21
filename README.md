@@ -1,117 +1,129 @@
-# Creating a Front-end Plugin
+# Creating a Backend Plugin
 
 
-### Create a Plugin ([Backstage's guide to create a new Plugin](https://backstage.io/docs/plugins/create-a-plugin))
+### Create a Plugin ([Backstage's guide to create a backend Plugin](https://backstage.io/docs/plugins/backend-plugin))
 
-- Execute the following command from the root of your Backstage repo to create a new Plugin
+- Execute the following command from the root of your Backstage repo to create a backend Plugin
 
   ```
-  yarn new --select plugin
+  yarn new --select backend-plugin
   ```
 
-- The wizard will ask for a Plugin id. Enter Id `my-frontend-plugin` and proceed
+- The wizard will ask for a Plugin id. Enter Id `test` and proceed
 
-- You can perform either of the following to run the plugin in isolation
-  
+- Run the following commands to start the backend plugin in standalone mode
+
   ```
-  cd plugins/my-frontend-plugin
+  cd plugins/test-backend
   yarn start
   ```
-  or
+
+- Run the following command in another terimal
 
   ```
-  yarn workspace @backstage/plugin-my-frontend-plugin start # From the root directory
+  curl localhost:7007/test/health
   ```
 
-- Embed your Plugin in the Entities page
+  The above action should return `{"status":"ok"}`.
 
-  ```tsx title="packages/app/src/components/catalog/EntityPage.tsx"
-  import { TopologyPage } from '@janus-idp/backstage-plugin-topology';
 
-  const serviceEntityPage = (
-    <EntityPageLayout>
-      ...
-  
-      <EntityLayout.Route path="/my-plugin" title="My FE Plugin">
-        <MyFrontendPluginPage />
-      </EntityLayout.Route>
+### Integrate the plugin in the Backstage backend
 
-      ...
-    </EntityPageLayout>
-  );
+- Copy the plugin name in the newly created backend plugin's package.json
+
+  ```
+  yarn workspace backend add @internal/plugin-test-backend^0.1.0
   ```
 
-### Update the Plugin
+- Create a new file named `packages/backend/src/plugins/test.ts`, and add the following to it
 
-- Use Backstage's [proxy](https://backstage.io/docs/plugins/proxying) service to use the `GitHub API` ([Guide to use Backstage Proxy](https://backstage.io/docs/tutorials/using-backstage-proxy-within-plugin/))
+  ```tsx title=test.ts
+  import { createRouter } from '@internal/plugin-test-backend';
+  import { Router } from 'express';
+  import { PluginEnvironment } from '../types';
 
-  - Set-up the Backstage Proxy
-  
-    ```yaml title="app-config.local.yaml"
-    proxy:
-      ...
-      '/github':
-      target: 'https://api.github.com'
-      headers:
-        Authorization: 'token ${GITHUB_TOKEN}'  
-    ```
-  
-  - Update the `ExampleFetchComponent` to use the `GitHub API`. Replace the contents of the component with the following
+  export default async function createPlugin(
+    env: PluginEnvironment,
+  ): Promise<Router> {
+    return await createRouter({
+      logger: env.logger,
+    });
+  }
+  ```
 
-    ```tsx title="ExampleFetchComponent.tsx"
-    import React from 'react';
-    import { makeStyles } from '@material-ui/core/styles';
-    import { Table, TableColumn, Progress, ResponseErrorPanel } from '@backstage/core-components';
-    import useAsync from 'react-use/lib/useAsync';
-    import { discoveryApiRef, useApi } from '@backstage/core-plugin-api';
+- And finally, wire this into the overall backend router. Edit `packages/backend/src/index.ts`
 
-    export const DenseTable = ({ users }: any) => {
+  ```tsx title=index.ts
+  import test from './plugins/test';
+  ...
+  async function main() {
+    ...
+    const testEnv = useHotMemoize(module, () => createEnv('test'));
+    apiRouter.use('/test', await test(testEnv));
+  ```
 
-      const columns: TableColumn[] = [
-        { title: 'Name', field: 'githubId' },
-        { title: 'Repository URL', field: 'repoUrl' },
-        { title: 'Type', field: 'type' },
-      ];
+- Stress test your service. Run the following command from the root of the repository
 
-      const data = users.map((user: any) => {
-        return {
-          githubId: user.login,
-          repoUrl: user.url,
-          type: user.type,
-        };
-      });
+  ```
+  yarn dev
+  ```
 
-      return (
-        <Table
-          title="Github Users"
-          options={{ search: false, paging: false }}
-          columns={columns}
-          data={data}
-        />
-      );
-    };
+- From another terminal execute the following `curl` command
+
+  ```
+  curl localhost:7007/api/test/health
+  ```
+
+  The above action should return the same response as above `{"status":"ok"}`
 
 
-    export const ExampleFetchComponent = () => {
+### Reading Backstage configuration using the Config API ([Backstage's guide to read configuration](https://backstage.io/docs/conf/reading))
 
-      const discoveryApi = useApi(discoveryApiRef);
-      const proxyURL = discoveryApi.getBaseUrl('proxy');
+- Add the following in the `test.ts` file
+
+  ```
+  ...
+  config: env.config,
+  ```
+
+- Copy the contents of the `router.ts` file in this branch and paste it in the `plugins/test-backend/src/service/router.ts` file of your backend plugin
+
+- In the  `app-config.yaml` add the following configuration
+
+  ```
+  test-plugin:
+    configA: "This is configA"
+    configB: "This is configB"
+
+  ```
+
+- From another terminal execute the following `curl` command
+
+  ```
+  curl localhost:7007/api/test/config/configA
+  ```
+
+  The above action should return the same response as above `{"status":"ok","value":"This is configA"}`
 
 
-      const { value, loading, error } = useAsync(async (): Promise<User[]> => {
-        const res = await fetch(`${await proxyURL}/github/users`)
-        const users= await res.json();
-        return users;
-      }, []);
+### Discover other plugins using the Discover API
 
-      if (loading) {
-        return <Progress />;
-      } else if (error) {
-        return <ResponseErrorPanel error={error} />;
-      }
+- Add the following in the `test.ts` file
 
-      return <DenseTable users={value || []} />;
-    };
+  ```
+  ...
+  discovery: env.discovery,
+  ```
 
-    ```
+- From another terminal execute the following `curl` command
 
+  ```
+  curl localhost:7007/api/test/user
+  ```
+
+  The above action should return the same response as above `{"status":"ok","value":"Debsmita Santra"}`
+
+
+### Use the newly created service in your frontend Plugin
+
+- Copy the contents of the `ExampleComponent.tsx` file in this branch and paste it in the `ExampleComponent.tsx` file in your frontend plugin path
