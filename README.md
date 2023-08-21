@@ -1,97 +1,59 @@
-# Setting up Backstage locally
-
-### Prerequisites for setting up Backstage
-- Node.js [Active LTS Release](https://nodejs.org/en/blog/release) installed using one of these methods:
-    - Using nvm (recommended)
-      - [Installing nvm](https://github.com/nvm-sh/nvm#install--update-script)
-      - [Install and change Node version with nvm](https://nodejs.org/en/download/package-manager#nvm)
-    - [Binary Download](https://nodejs.org/en/download)
-    - [Package manager](https://nodejs.org/en/download/package-manager)
-    - [Using NodeSource packages](https://github.com/nodesource/distributions/blob/master/README.md)
-- [yarn](https://classic.yarnpkg.com/en/docs/install)
-- [docker](https://docs.docker.com/engine/install/)
-- [git](https://github.com/git-guides/install-git)
-- [postgresql](https://www.postgresql.org/download/)
-- [psql](https://www.timescale.com/blog/how-to-install-psql-on-mac-ubuntu-debian-windows/) 
-- [minikube](https://minikube.sigs.k8s.io/docs/start/)
-- [kubectl](https://kubernetes.io/docs/tasks/tools/)
-
-### Backstage Installation ([Backstage getting started guide](https://backstage.io/docs/getting-started/#create-your-backstage-app))
-
-- Execute the following command to set-up an instance of Backstage in your local
-```
-npx @backstage/create-app@latest
-```
-
-- The wizard will ask for a name of the app which will also be the name of your folder.
-
-- Once the installation is successful navitage to your backstage folder
-
-- Execute the following steps to start the app
-```
-cd <backstage-folder>
-yarn dev
-```
+# Creating a Frontend Plugin
 
 
-### Configuring PostgreSQL database ([Backstage database configuration guide](https://backstage.io/docs/tutorials/configuring-plugin-databases/))
+### Create a Plugin ([Backstage's guide to create a new Plugin](https://backstage.io/docs/plugins/create-a-plugin))
 
-- install pg in the backend package to install appropriate PostgreSQL database drivers
-```
-yarn add --cwd packages/backend pg
-```
+- Execute the following command from the root of your Backstage repo to create a new Plugin
 
-- export the following environment variables
-```
-export POSTGRES_HOST=<your-postgres-host-name>
-```
-```
-export POSTGRES_PORT=<your-postgres-port>
-```
-```
-export POSTGRES_USER=<your-postgres-user-name>
-```
-```
-export POSTGRES_PASSWORD=<your-postgres-password>
-```
+  ```
+  yarn new --select plugin
+  ```
 
+- The wizard will ask for a Plugin id. Enter Id `my-frontend-plugin` and proceed
 
-- Add the following snippet in the `app-config.local.yaml` file to configure your database
-```
-backend:
-  ...
-  database:
-    client: pg
-    connection:
-      host: ${POSTGRES_HOST}
-      port: ${POSTGRES_PORT}
-      user: ${POSTGRES_USER}
-      password: ${POSTGRES_PASSWORD}
-```
+- You can perform either of the following to run the plugin in isolation
+  
+  ```
+  cd plugins/my-frontend-plugin
+  yarn start
+  ```
+  or
 
-- Start the backstage app
-```
-yarn dev
-```
+  ```
+  yarn workspace @backstage/plugin-my-frontend-plugin start # From the root directory
+  ```
 
+- Embed your Plugin in the Entities page
 
-### Set-up GitHub Integration ([Backstage GitHub integration guide](https://backstage.io/docs/getting-started/configuration#setting-up-a-github-integration))
+  ```tsx title="packages/app/src/components/catalog/EntityPage.tsx"
+  import { TopologyPage } from '@janus-idp/backstage-plugin-topology';
 
-- Create your Personal Access Token by opening the [GitHub token creation page](https://github.com/settings/tokens/new)
+  const serviceEntityPage = (
+    <EntityPageLayout>
+      ...
+  
+      <EntityLayout.Route path="/my-plugin" title="My FE Plugin">
+        <MyFrontendPluginPage />
+      </EntityLayout.Route>
 
-- select `repo` and `workflow`
+      ...
+    </EntityPageLayout>
+  );
+  ```
 
-- Export your GitHub token
-```
-export GITHUB_TOKEN=<your-github-token>
-```
+### Update the Plugin
 
-- Add the following snippet in the `app-config.local.yaml` file
+- Use Backstage's [proxy](https://backstage.io/docs/plugins/proxying) service to use the `GitHub API` ([Guide to use Backstage Proxy](https://backstage.io/docs/tutorials/using-backstage-proxy-within-plugin/))
 
-```
-integrations:
-  ...
-  github:
-    - host: github.com
-      token: ${GITHUB_TOKEN} # this should be the token from GitHub which will look like ghp_urtokendeinfewinfiwebfweb
-```
+  - Set-up the Backstage Proxy
+  
+    ```yaml title="app-config.local.yaml"
+    proxy:
+      ...
+      '/github':
+      target: 'https://api.github.com'
+      headers:
+        Authorization: 'token ${GITHUB_TOKEN}'  
+    ```
+  
+  - Update the `ExampleFetchComponent` to use the `GitHub API`. Replace the contents of the `ExampleFetchComponent.tsx` file with the   `ExampleFetchComponent.tsx` file in this branch
