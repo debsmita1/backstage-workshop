@@ -1,59 +1,73 @@
-# Creating a Frontend Plugin
+# Deploying an instance of Backstage using a Helm Chart
+
+### Prerequisites
+
+[Helm CLI](https://helm.sh/docs/intro/install/)
 
 
-### Create a Plugin ([Backstage's guide to create a new Plugin](https://backstage.io/docs/plugins/create-a-plugin))
+### Backstage Helm Chart ([Helm Chart Link](https://artifacthub.io/packages/helm/backstage/backstage))
 
-- Execute the following command from the root of your Backstage repo to create a new Plugin
+- Start your Docker Desktop
 
-  ```
-  yarn new --select plugin
-  ```
-
-- The wizard will ask for a Plugin id. Enter Id `my-frontend-plugin` and proceed
-
-- You can perform either of the following to run the plugin in isolation
-  
-  ```
-  cd plugins/my-frontend-plugin
-  yarn start
-  ```
-  or
+- Start your `minikube`
 
   ```
-  yarn workspace @backstage/plugin-my-frontend-plugin start # From the root directory
+  minikube start
   ```
 
-- Embed your Plugin in the Entities page
+- Run the following commands to add the chart repositories
 
-  ```tsx title="packages/app/src/components/catalog/EntityPage.tsx"
-  import { TopologyPage } from '@janus-idp/backstage-plugin-topology';
-
-  const serviceEntityPage = (
-    <EntityPageLayout>
-      ...
-  
-      <EntityLayout.Route path="/my-plugin" title="My FE Plugin">
-        <MyFrontendPluginPage />
-      </EntityLayout.Route>
-
-      ...
-    </EntityPageLayout>
-  );
+  ```
+  helm repo add backstage https://backstage.github.io/charts
+  helm repo add bitnami https://charts.bitnami.com/bitnami
   ```
 
-### Update the Plugin
+- Run the following command to access the `minikube` dashboard
 
-- Use Backstage's [proxy](https://backstage.io/docs/plugins/proxying) service to use the `GitHub API` ([Guide to use Backstage Proxy](https://backstage.io/docs/tutorials/using-backstage-proxy-within-plugin/))
+  ```
+  minikube dashboard
+  ```
 
-  - Set-up the Backstage Proxy
-  
-    ```yaml title="app-config.local.yaml"
-    proxy:
-      ...
-      '/github':
-      target: 'https://api.github.com'
-      headers:
-        Authorization: 'token ${GITHUB_TOKEN}'  
+- Run the following command in another terminal to view the `Backstage` application
+
+  ```
+  minikube service my-release-backstage -n backstage-workshop
+  ```
+
+- Create a `Secret` resource to store all your secrets in base64 encoded format
+
+  - Convert your `Github token` to base64
+
     ```
-  
-  - Update the `ExampleFetchComponent` to use the `GitHub API`. Replace the contents of the `ExampleFetchComponent.tsx` file with the   `ExampleFetchComponent.tsx` file in this branch
+    echo -n 'your-token' | base64
+    ```
+
+  - Click on the `+` on the top-right in your `minikube`. Copy the contents of the `my-backstage-secrets.yaml` file in this branch and paste the `secret` resource yaml in the yaml editor. Replace the passwords with your base64 strings and hit Upload
+
+- Create `ConfigMap` resource to pass extra configuration to your Backstage instance
+
+  - Run the following command to apply the ConfigMap resource in this branch
+
+    ```
+    kubectl create configmap my-app-config --from-file=app-config.extra.yaml=./local/path/to/your/app-config.extra.yaml -n backstage-workshop
+    ```
+
+    or 
+
+  - Click on the `+` on the top-right in your `minikube`. Copy the contents of the `my-app-config.yaml` file in this branch and paste the contents in the yaml editor. Add the base URL of the app, backend and cors origin to the application host URL. Hit Upload.
+
+  Note: Every time you update the `ConfigMap` or the `Secret` resource after the Helm Chart is deployed, you would need to restart the associated `Deployment` resource
+
+- Create `values.yaml` file to pass the `Secret` and `ConfigMap` references to the `Backstage` instance. Copy the contents of the `values.yaml` file in this branch
+
+- Run the following command to install the helm chart
+
+  ```
+  helm install my-release backstage/backstage --values=values.yaml -n backstage-workshop
+  ```
+
+- Run the following command in another terminal to view the `Backstage` application and update the base urls in the `Config Map` resource
+
+  ```
+  minikube service my-release-backstage -n backstage-workshop
+  ```
