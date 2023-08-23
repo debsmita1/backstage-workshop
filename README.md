@@ -1,59 +1,61 @@
 # Adding a component to the catalog
 
+### Prerequisites
+
+- [pip3](https://www.activestate.com/resources/quick-reads/how-to-install-and-use-pip3/)
 
 ### Adding a new component to the Software Catalog
 
 - Click on `Create` navigation item
 
 - If you are starting from scratch, then select a template to get started:
-  - Select the `Example Node.js Template` 
+
+  - Select the `Example Node.js Template`
   - Enter `nodejs-app` in the `Name` field
   - Enter your GitHub Id in the `owner` field
   - Enter `nodejs-app` in the `Repository` field
 
-  - To add more templates in the catalog, add the snippet below in the `app-config.local.yaml` and re-start the app 
+  - To add more templates in the catalog, add the following urls in the `app-config.local.yaml` under `catalog.locations` and re-start the app
 
     ```
     catalog:
-    ...
-    locations:
       ...
-      - type: url
-        target: https://github.com/janus-idp/software-templates/blob/main/showcase-templates.yaml
+      locations:
+        ...
+        - type: url
+          target: https://github.com/backstage/backstage/blob/master/plugins/scaffolder-backend/sample-templates/remote-templates.yaml
+        - type: url
+          target: https://github.com/janus-idp/software-templates/blob/main/showcase-templates.yaml
     ```
 
     The above action will add the templates contributed by the [Janus Community](https://janus-idp.io/gpts)
 
-- If you already have an application, then click on `REGISTER EXISTING COMPONENT`
-  - Enter the URL of your source code repository
-  - Click on `Analyze` and hit `Import`
-  
-  The above action will add your existing application as a component in the Catalog Page
-
-
 ### Enabling TechDocs ([Backstage TechDocs configuration guide](https://backstage.io/docs/features/techdocs/getting-started))
 
-- Clone the repo create by the Template
+- Run the following command to install `mkdocs-techdocs-core` package
+
+  ```
+  pip3 install mkdocs-techdocs-core
+  ```
+
+- Make the following change in the `app-config.yaml` and restart the app
+
+  ```yaml app-config.yaml
+  techdocs:
+    builder: "local" # Alternatives - 'external'
+    generator:
+      runIn: "local" # Alternatives - 'local'
+    publisher:
+      type: "local" # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
+  ```
+
+- Clone the repo created by the Template
 
   ```
   git clone <Repository-URL>
   ```
 
-- Navigate to the root of your repository
-
-- Create a file named `mkdocs.yaml`, and add the following content 
-
-  ```
-  site_name: <provide a name for your application’s doc>
-
-  nav:
-    - Home: index.md
-    - Guide:
-      - Pre-requisites: application/guide.md
-
-  plugins:
-    - techdocs-core
-  ```
+- Navigate to the root of your repository and create a file named `mkdocs.yaml`. Copy the contents from the `mkdocs.yaml` file in this branch
 
 - Create `docs` folder in the root of the repository
 
@@ -77,6 +79,58 @@
 
 - Push the changes and refresh your entity to view the tech docs for your component.
 
+### Configuring Authentication in Backstage ([Backstage Authentication guide](https://backstage.io/docs/auth/))
+
+- To add GitHub authentication, create OAuth App from the GitHub [developer settings](https://github.com/settings/developers). Use the below values for setting up OAuth
+
+  ```
+  Application name: Backstage (or your custom app name)
+  Homepage URL: http://localhost:3000
+  Authorization callback URL: http://localhost:7007/api/auth/github/handler/frame
+  ```
+
+- Add the following block under the `auth` section in the `app-config.local.yaml` to configure the GitHub Provider
+
+  ```yaml title=app-config.local.yaml
+    auth:
+      environment: development
+      providers:
+        github:
+          development:
+            clientId: ${AUTH_GITHUB_CLIENT_ID}
+            clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+  ```
+
+- Create the Sign-In Page
+
+  ```tsx title=packages/app/src/App.tsx
+
+    import { githubAuthApiRef } from '@backstage/core-plugin-api';
+    import { SignInPage } from '@backstage/core-components';
+
+    const app = createApp({
+      ...
+      components: {
+        SignInPage: props => (
+          <SignInPage
+            {...props}
+            auto
+              providers={[
+                  'guest',
+                {
+                id: 'github-auth-provider',
+                title: 'GitHub',
+                message: 'Sign in using GitHub',
+                apiRef: githubAuthApiRef,
+                },
+              ]}
+            />
+         ),
+        },
+      ...
+    });
+
+  ```
 
 ### Add the Kubernetes Plugin ([Backstage Kubernetes Plugin](https://backstage.io/docs/features/kubernetes/))
 
@@ -160,6 +214,7 @@
   minikube dashboard
   ```
 
+- Follow the [installation](https://backstage.io/docs/features/kubernetes/installation) steps 
 
 ### Add Quay Container Registry Plugin by Red Hat ([Backstage Marketplace](https://backstage.io/plugins/))
 
