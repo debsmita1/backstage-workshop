@@ -43,7 +43,7 @@
 
 ### Update the Plugin
 
-- Use Backstage's [proxy](https://backstage.io/docs/plugins/proxying) service to use the `GitHub API` ([Guide to use Backstage Proxy](https://backstage.io/docs/tutorials/using-backstage-proxy-within-plugin/))
+- Use Backstage's [proxy](https://backstage.io/docs/plugins/proxying) service to use the [GitHub API](https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api) ([Guide to use Backstage Proxy](https://backstage.io/docs/tutorials/using-backstage-proxy-within-plugin/))
 
   - Set-up the Backstage Proxy
   
