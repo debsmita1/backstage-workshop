@@ -24,11 +24,9 @@
         ...
         - type: url
           target: https://github.com/backstage/backstage/blob/master/plugins/scaffolder-backend/sample-templates/remote-templates.yaml
-        - type: url
-          target: https://github.com/janus-idp/software-templates/blob/main/showcase-templates.yaml
-    ```
-
-    The above action will add the templates contributed by the [Janus Community](https://janus-idp.io/gpts)
+          rules:
+            - allow: [Template]
+      ```
 
 ### Enabling TechDocs ([Backstage TechDocs configuration guide](https://backstage.io/docs/features/techdocs/getting-started))
 
