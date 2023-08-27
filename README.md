@@ -220,8 +220,8 @@
      annotations:
        ...
        backstage.io/kubernetes-id: backstage-workshop
-    spec:
-      type: service
+     spec:
+       type: service
   ```
 
 ### Add Quay Container Registry Plugin by Red Hat ([Backstage Marketplace](https://backstage.io/plugins/))
