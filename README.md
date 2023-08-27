@@ -11,21 +11,6 @@
 
 - The wizard will ask for a Plugin id. Enter Id `my-plugin` and proceed
 
-- Run the following commands to start the backend plugin in standalone mode
-
-  ```
-  cd plugins/test-backend
-  yarn start
-  ```
-
-- Run the following command in another terimal
-
-  ```
-  curl localhost:7007/test/health
-  ```
-
-  The above action should return `{"status":"ok"}`.
-
 
 ### Integrate the plugin in the Backstage backend
 
