@@ -27,6 +27,18 @@
   - Enter `This is a react application` in the Description field
   - Enter your GitHub Id in the `owner` field
   - Enter `react-app` in the `Repository` field
+  - Add the following catalog entity url in the `app-config.yaml` under `catalog.locations`
+
+    ```
+    catalog:
+      ...
+      locations:
+        ...
+        - type: url
+          target: https://github.com/debsmita1/react-app/blob/master/catalog-info.yaml
+          rules:
+            - allow: [Component]
+    ```
 
 
 ### Enabling TechDocs ([Backstage TechDocs configuration guide](https://backstage.io/docs/features/techdocs/getting-started))
@@ -227,3 +239,7 @@
 ### Add Quay Container Registry Plugin by Red Hat ([Backstage Marketplace](https://backstage.io/plugins/))
 
 - Follow the steps [here](https://janus-idp.io/plugins/quay/) to integrate the front-end plugin in your Backstage instance
+  
+  - Add the following annotation in the `catalog-info.yaml` file
+
+    ```quay.io/repository-slug: janus-idp/backstage-showcase```
