@@ -9,7 +9,22 @@
   yarn new --select backend-plugin
   ```
 
-- The wizard will ask for a Plugin id. Enter Id `my-plugin` and proceed
+- The wizard will ask for a Plugin id. Enter Id `test` and proceed
+
+- Run the following commands to start the backend plugin in standalone mode
+
+  ```
+  cd plugins/test-backend
+  yarn start
+  ```
+
+- Run the following command in another terminal
+
+  ```
+  curl localhost:7007/test/health
+  ```
+
+  The above action should return `{"status":"ok"}`.
 
 
 ### Integrate the plugin in the Backstage backend
@@ -22,7 +37,7 @@
 
 - Create a new file named `packages/backend/src/plugins/test.ts`, and add the following to it
 
-  ```tsx title=test.ts
+  ```ts title=test.ts
   import { createRouter } from '@internal/plugin-test-backend';
   import { Router } from 'express';
   import { PluginEnvironment } from '../types';
@@ -38,7 +53,7 @@
 
 - And finally, wire this into the overall backend router. Edit `packages/backend/src/index.ts`
 
-  ```tsx title=index.ts
+  ```ts title=index.ts
   import test from './plugins/test';
   ...
   async function main() {
