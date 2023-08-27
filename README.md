@@ -213,7 +213,16 @@
   minikube dashboard
   ```
 
-- Follow the [installation](https://backstage.io/docs/features/kubernetes/installation) steps 
+- Follow the [installation](https://backstage.io/docs/features/kubernetes/installation) steps
+- Add the following changes in the entity's `catalog-info.yaml` file
+
+  ```yaml title=catalog-info.yaml
+     annotations:
+       ...
+       backstage.io/kubernetes-id: backstage-workshop
+    spec:
+      type: service
+  ```
 
 ### Add Quay Container Registry Plugin by Red Hat ([Backstage Marketplace](https://backstage.io/plugins/))
 
