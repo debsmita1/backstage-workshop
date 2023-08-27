@@ -26,7 +26,7 @@
 - Embed your Plugin in the Entities page
 
   ```tsx title="packages/app/src/components/catalog/EntityPage.tsx"
-  import { TopologyPage } from '@janus-idp/backstage-plugin-topology';
+  import {MyFrontendPluginPage} from '@internal/plugin-my-frontend-plugin';
 
   const serviceEntityPage = (
     <EntityPageLayout>
