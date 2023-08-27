@@ -82,9 +82,9 @@
 - To add GitHub authentication, create OAuth App from the GitHub [developer settings](https://github.com/settings/developers). Use the below values for setting up OAuth
 
   ```
-  Application name: Backstage (or your custom app name)
-  Homepage URL: http://localhost:3000
-  Authorization callback URL: http://localhost:7007/api/auth/github/handler/frame
+  Application name: Backstage // or your custom app name
+  Homepage URL: http://localhost:3000 // should point to the Backstage Frontend
+  Authorization callback URL: http://localhost:7007/api/auth/github/handler/frame // should point to the Backstage Backend
   ```
 
 - Add the following block under the `auth` section in the `app-config.local.yaml` to configure the GitHub Provider
