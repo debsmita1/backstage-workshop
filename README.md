@@ -10,11 +10,6 @@
 
 - If you are starting from scratch, then select a template to get started:
 
-  - Select the `Example Node.js Template`
-  - Enter `nodejs-app` in the `Name` field
-  - Enter your GitHub Id in the `owner` field
-  - Enter `nodejs-app` in the `Repository` field
-
   - To add more templates in the catalog, add the following urls in the `app-config.local.yaml` under `catalog.locations` and re-start the app
 
     ```
@@ -27,6 +22,12 @@
           rules:
             - allow: [Template]
       ```
+  - Select the `Create React App Template`
+  - Enter `backstage-workshop` in the `Name` field
+  - Enter `This is a react application` in the Description field
+  - Enter your GitHub Id in the `owner` field
+  - Enter `react-app` in the `Repository` field
+
 
 ### Enabling TechDocs ([Backstage TechDocs configuration guide](https://backstage.io/docs/features/techdocs/getting-started))
 
