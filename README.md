@@ -9,7 +9,7 @@
   yarn new --select backend-plugin
   ```
 
-- The wizard will ask for a Plugin id. Enter Id `test` and proceed
+- The wizard will ask for a Plugin id. Enter Id `my-plugin` and proceed
 
 - Run the following commands to start the backend plugin in standalone mode
 
