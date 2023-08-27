@@ -8,7 +8,11 @@
   npx @backstage/create-app@latest
   ```
 
-- The wizard will ask for a name of the app which will also be the name of your folder.
+- The wizard will ask for a name of the app which will also be the name of your folder
+
+  ```
+  backstage-app
+  ```
 
 - Once the installation is successful navitage to your backstage folder
 
@@ -22,7 +26,7 @@
 
 ### Configuring PostgreSQL database ([Backstage database configuration guide](https://backstage.io/docs/tutorials/configuring-plugin-databases/))
 
-- install pg in the backend package to install appropriate PostgreSQL database drivers
+- install `pg` in the backend package to install appropriate PostgreSQL database drivers
 
   ```
   yarn add --cwd packages/backend pg
