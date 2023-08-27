@@ -15,7 +15,7 @@ spec:
     metadata:
       labels:
         app: hello-app
-        backstage.io/kubernetes-id: test-backstage
+        backstage.io/kubernetes-id: backstage-workshop
     spec:
       containers:
         - name: hello-app
