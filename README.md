@@ -63,9 +63,9 @@
 
 - Create the `index.md` and `application/guide.md` files and add contents to it.
 
-- Update the component's entity description by adding the following annotation
+- Update the component's entity description by adding the following annotation in the `catalog-info.yaml`
 
-  ```yaml title="deployment.yaml"
+  ```yaml title="catalog-info.yaml"
       ...
       metadata:
         ...
@@ -99,7 +99,7 @@
             clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
   ```
 
-- Create the Sign-In Page
+- Create the Sign-In Page. Make the following changes in the `App.tsx` file
 
   ```tsx title=packages/app/src/App.tsx
 
