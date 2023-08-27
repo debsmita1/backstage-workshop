@@ -5,7 +5,7 @@ metadata:
   namespace: backstage-workshop
   labels:
     app: hello-app
-    backstage.io/kubernetes-id: test-backstage
+    backstage.io/kubernetes-id: backstage-workshop
 spec:
   replicas: 1
   selector:
