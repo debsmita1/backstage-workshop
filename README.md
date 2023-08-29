@@ -60,7 +60,7 @@
       type: "local" # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
   ```
 
-- To add or update documentation, clone the repo created by the Template
+- To add documentation, clone the repo created by the Template
 
   ```
   git clone <Repository-URL>
