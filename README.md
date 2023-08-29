@@ -2,7 +2,9 @@
 
 ### Prerequisites
 
-[Helm CLI](https://helm.sh/docs/intro/install/)
+- [minikube](https://minikube.sigs.k8s.io/docs/start/)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/)
+- [Helm CLI](https://helm.sh/docs/intro/install/)
 
 
 ### Backstage Helm Chart ([Helm Chart Link](https://artifacthub.io/packages/helm/backstage/backstage))
@@ -54,11 +56,11 @@
 
     or 
 
-  - Click on the `+` on the top-right in your `minikube`. Copy the contents of the `my-app-config.yaml` file in this branch and paste the contents in the yaml editor. Add the base URL of the app, backend and cors origin to the application host URL. Hit Upload.
+  - Click on the `+` on the top-right in your `minikube`. Copy the contents of the `my-app-config.yaml` file in this branch and paste the contents into the yaml editor. Add the base URL of the app, backend, and cors origin to the application host URL. Hit Upload.
 
-  Note: Every time you update the `ConfigMap` or the `Secret` resource after the Helm Chart is deployed, you would need to restart the associated `Deployment` resource
+  Note: Every time you update the `ConfigMap` or the `Secret` resource after the Helm Chart is deployed, you need to restart the associated `Deployment` resource
 
-- Create `values.yaml` file to pass the `Secret` and `ConfigMap` references to the `Backstage` instance. Copy the contents of the `values.yaml` file in this branch
+- Create `values.yaml` file to pass the `Secret` and `ConfigMap` reference to the `Backstage` instance. Copy the contents of the `values.yaml` file in this branch
 
 - Run the following command to install the helm chart
 
@@ -66,7 +68,7 @@
   helm install my-release backstage/backstage --values=values.yaml -n backstage-workshop
   ```
 
-- Run the following command in another terminal to view the `Backstage` application and update the base urls in the `Config Map` resource
+- Run the following command in another terminal to view the `Backstage` application and update the base URLs in the `Config Map` resource
 
   ```
   minikube service my-release-backstage -n backstage-workshop
