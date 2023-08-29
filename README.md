@@ -23,7 +23,5 @@
 - [yarn](https://classic.yarnpkg.com/en/docs/install)
 - [docker](https://docs.docker.com/engine/install/)
 - [git](https://github.com/git-guides/install-git)
-- [postgresql](https://www.postgresql.org/download/)
-- [psql](https://www.timescale.com/blog/how-to-install-psql-on-mac-ubuntu-debian-windows/)
 - [minikube](https://minikube.sigs.k8s.io/docs/start/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
