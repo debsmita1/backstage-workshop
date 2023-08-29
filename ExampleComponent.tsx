@@ -8,7 +8,7 @@ import { ExampleFetchComponent } from '../ExampleFetchComponent';
 export const ExampleComponent = () => {
   const discoveryApi = useApi(discoveryApiRef);
   const baseUrl = discoveryApi.getBaseUrl('test');
-  const { value } = useAsync(async (): Promise<{ response: string }> => {
+  const { value } = useAsync(async () => {
     const response = await fetch(`${await baseUrl}/user`);
     const data = await response.json();
     return data;
@@ -17,7 +17,7 @@ export const ExampleComponent = () => {
   return (
     <Page themeId="tool">
       <Header title="Welcome!">
-        <HeaderLabel label="Owner" value={value?.response || 'Owner'} />
+        <HeaderLabel label="Owner" value={value.value.name || 'Owner'} />
         <HeaderLabel label="Lifecycle" value="Alpha" />
       </Header>
       <Content>
