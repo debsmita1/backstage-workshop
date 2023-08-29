@@ -10,7 +10,7 @@
 
 - If you are starting from scratch, then select a template to get started:
 
-  - To add more templates in the catalog, add the following urls in the `app-config.local.yaml` under `catalog.locations` and re-start the app
+  - To add more templates in the catalog, add the following URLs in the `app-config.yaml` under `catalog.locations` and re-start the app
 
     ```
     catalog:
@@ -25,9 +25,9 @@
   - Select the `Create React App Template`
   - Enter `backstage-workshop` in the `Name` field
   - Enter `This is a react application` in the Description field
-  - Enter your GitHub Id in the `owner` field
+  - Enter your GitHub ID in the `owner` field
   - Enter `react-app` in the `Repository` field
-  - Add the following catalog entity url in the `app-config.yaml` under `catalog.locations`
+  - Add the following catalog entity URL in the `app-config.yaml` under `catalog.locations`
 
     ```
     catalog:
@@ -74,7 +74,7 @@
   mkdir docs
   ```
 
-- Create the `index.md` and `application/guide.md` files and add contents to it.
+- Create the `index.md` and `application/guide.md` files and add contents to them.
 
 - Update the component's entity description by adding the following annotation in the `catalog-info.yaml`
 
