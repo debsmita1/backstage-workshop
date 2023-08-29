@@ -25,7 +25,7 @@
   - Select the `Create React App Template`
   - Enter `backstage-workshop` in the `Name` field
   - Enter `This is a react application` in the Description field
-  - Enter your GitHub ID in the `owner` field
+  - Enter your name in the `owner` field
   - Enter `react-app` in the `Repository` field
   - Add the following catalog entity URL in the `app-config.yaml` under `catalog.locations`
 
