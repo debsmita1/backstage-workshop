@@ -35,7 +35,7 @@
       locations:
         ...
         - type: url
-          target: https://github.com/debsmita1/react-app/blob/master/catalog-info.yaml
+          target: https://github.com/debsmita1/react-app/blob/master/catalog-info.yaml //Replace this with your entity file URL
           rules:
             - allow: [Component]
     ```
@@ -60,15 +60,15 @@
       type: "local" # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
   ```
 
-- Clone the repo created by the Template
+- To add or update documentation, clone the repo created by the Template
 
   ```
   git clone <Repository-URL>
   ```
 
-- Navigate to the root of your repository and create a file named `mkdocs.yaml`. Copy the contents from the `mkdocs.yaml` file in this branch
+- Navigate to the root of your repository and create a file named `mkdocs.yaml` if not already present. Copy the contents from the `mkdocs.yaml` file in this branch
 
-- Create `docs` folder in the root of the repository
+- Create `docs` folder in the root of the repository if not already present
 
   ```
   mkdir docs
