@@ -23,6 +23,7 @@ export const DenseTable = ({ users }: any) => {
 
   const data = users.map((user: any) => {
     return {
+      id: user.login,
       githubId: user.login,
       repoUrl: user.html_url,
       type: user.type,
