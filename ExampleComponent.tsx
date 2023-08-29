@@ -17,7 +17,7 @@ export const ExampleComponent = () => {
   return (
     <Page themeId="tool">
       <Header title="Welcome!">
-        <HeaderLabel label="Owner" value={value.value.name || 'Owner'} />
+        <HeaderLabel label="Owner" value={value?.value?.name || 'Owner'} />
         <HeaderLabel label="Lifecycle" value="Alpha" />
       </Header>
       <Content>
