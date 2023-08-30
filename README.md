@@ -28,7 +28,14 @@
 
 - Create your Personal Access Token by opening the [GitHub token creation page](https://github.com/settings/tokens/new)
 
-- Select `repo` and `workflow` and generate the token.
+- Select the following and generate the token.
+  ```
+  read:org
+  read:user
+  user:email
+  repo
+  workflow
+  ```
 
 - Export your GitHub token
 
