@@ -36,4 +36,5 @@
 
 ### Good to have
 - [git](https://github.com/git-guides/install-git)
-- Any Kubernetes cluster
+- Any Kubernetes cluster preferably [minikube](https://minikube.sigs.k8s.io/docs/start/)
+
