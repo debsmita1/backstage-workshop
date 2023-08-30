@@ -72,7 +72,7 @@
   Authorization callback URL: http://localhost:7007/api/auth/github/handler/frame // should point to the Backstage Backend
   ```
 
-- Add the following block under the `auth` section in the `app-config.local.yaml` to configure the GitHub Provider
+- Add the following block under the `auth` section in the `app-config.yaml` to configure the GitHub Provider
 
   ```yaml title=app-config.local.yaml
     auth:
