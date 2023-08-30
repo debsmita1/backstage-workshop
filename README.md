@@ -41,4 +41,4 @@
 ### Good to have
 - [git](https://github.com/git-guides/install-git)
 - Any Kubernetes cluster preferably [minikube](https://minikube.sigs.k8s.io/docs/start/)
-
+- [Helm CLI](https://helm.sh/docs/intro/install/)
