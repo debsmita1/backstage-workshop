@@ -243,7 +243,7 @@ service:
   # -- Node port for the Backstage client connections
   # Choose port between `30000-32767`
   nodePorts:
-    backend: 30007
+    backend: 30017
 
   # -- Control where client requests go, to the same pod or round-robin
   # (values: `ClientIP` or `None`)
