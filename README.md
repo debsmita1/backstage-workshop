@@ -35,7 +35,7 @@
       locations:
         ...
         - type: url
-          target: https://github.com/debsmita1/react-app/blob/master/catalog-info.yaml //Replace this with your entity file URL
+          target: https://github.com/debsmita1/react-app/blob/master/catalog-info.yaml # Replace this with your entity file URL
           rules:
             - allow: [Component]
     ```
