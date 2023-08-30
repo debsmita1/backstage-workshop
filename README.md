@@ -173,7 +173,7 @@
   kubectl cluster-info
   ```
 
-- Add the following snippet in the `app-config.local.yaml` file
+- Add the following snippet in the `app-config.yaml` file
 
   ```
   ...
