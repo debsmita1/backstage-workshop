@@ -1,7 +1,0 @@
-site_name: <provide a name for your application’s doc>
-nav:
-  - Home: index.md
-  - Guide:
-    - Pre-requisites: application/guide.md
-plugins:
-    - techdocs-core
