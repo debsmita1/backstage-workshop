@@ -60,35 +60,7 @@
       type: "local" # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
   ```
 
-- To add documentation, clone the repo created by the Template
-
-  ```
-  git clone <Repository-URL>
-  ```
-
-- Navigate to the root of your repository and create a file named `mkdocs.yaml` if not already present. Copy the contents from the `mkdocs.yaml` file in this branch
-
-- Create `docs` folder in the root of the repository if not already present
-
-  ```
-  mkdir docs
-  ```
-
-- Create the `index.md` and `application/guide.md` files and add contents to them.
-
-- Update the component's entity description by adding the following annotation in the `catalog-info.yaml`
-
-  ```yaml title="catalog-info.yaml"
-      ...
-      metadata:
-        ...
-        annotations:
-          ...
-          backstage.io/techdocs-ref: dir:.
-
-  ```
-
-- Push the changes and refresh your entity to view the tech docs for your component.
+- Restart the app to view the documentation site
 
 ### Configuring Authentication in Backstage ([Backstage Authentication guide](https://backstage.io/docs/auth/))
 
