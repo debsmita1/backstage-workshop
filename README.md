@@ -10,7 +10,7 @@
 
 - Create a Backend Plugin ([guide](https://github.com/debsmita1/backstage-workshop/tree/create-be-plugin))
 
-- Deploy an instance of Backstage on `minikube` using a Helm Chart ([guide](https://github.com/debsmita1/backstage-workshop/tree/helm-backstage))
+- Deploy an instance of Backstage on `minikube` using the Backstage Helm Chart ([guide](https://github.com/debsmita1/backstage-workshop/tree/helm-backstage))
 
 ### Prerequisites for this workshop
 - Node.js version >=18.12.0  (https://nodejs.org/en/blog/release/v18.17.1) :
