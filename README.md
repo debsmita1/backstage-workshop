@@ -9,12 +9,16 @@
 
 ### Backstage Helm Chart ([Helm Chart Link](https://artifacthub.io/packages/helm/backstage/backstage))
 
-- Start your Docker Desktop
-
 - Start your `minikube`
 
   ```
-  minikube start
+  minikube start --driver=docker
+  ```
+
+- Run the following command to create a namespace
+
+  ```
+  kubectl create namespace backstage-workshop
   ```
 
 - Run the following commands to add the chart repositories
