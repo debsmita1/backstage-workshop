@@ -24,6 +24,7 @@
         ```
         nvm use 18.17.1
         ```
+
 - [yarn](https://classic.yarnpkg.com/en/docs/install)
   ```
   npm install --global yarn
@@ -32,7 +33,7 @@
   ```
   yarn --version
   ```
-- [docker](https://docs.docker.com/engine/install/)
+
 - Prefered IDE [Visual Studio Code](https://code.visualstudio.com/download)
 
 ### Good to have
