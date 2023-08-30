@@ -34,6 +34,8 @@
   yarn --version
   ```
 
+- [pip3](https://www.activestate.com/resources/quick-reads/how-to-install-and-use-pip3/)
+
 - Prefered IDE [Visual Studio Code](https://code.visualstudio.com/download)
 
 ### Good to have
