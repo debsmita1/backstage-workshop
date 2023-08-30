@@ -33,6 +33,7 @@
   yarn --version
   ```
 - [docker](https://docs.docker.com/engine/install/)
+- Prefered IDE [Visual Studio Code](https://code.visualstudio.com/download)
 
 ### Good to have
 - [git](https://github.com/git-guides/install-git)
