@@ -30,12 +30,6 @@
   minikube dashboard
   ```
 
-- Run the following command in another terminal to view the `Backstage` application
-
-  ```
-  minikube service my-release-backstage -n backstage-workshop
-  ```
-
 - Create a `Secret` resource to store all your secrets in base64 encoded format
 
   - Convert your `Github token` to base64
