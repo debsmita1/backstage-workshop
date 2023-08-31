@@ -117,88 +117,26 @@
 
 ### Add the Kubernetes Plugin ([Backstage Kubernetes Plugin](https://backstage.io/docs/features/kubernetes/))
 
-- Start the Docker Desktop
-
-- Start the minikube
+- Add the following configuration in the `app-config.yaml` file
 
   ```
-  minikube start --driver=docker
-  ```
-
-- Create a namespace
-
-  ```
-  kubectl create namespace backstage-workshop
-  ```
-
-- Create Service Account
-
-  ```
-  kubectl create serviceaccount backstage-sa -n backstage-workshop
-  ```
-
-- Create a Token
-
-  ```
-  kubectl create token backstage-sa -n backstage-workshop
-  ```
-
-- Create a Cluster Role
-
-  ```
-  kubectl apply -f ./backstage-cr.yaml
-  ```
-
-- Create a Cluster Role Binding
-
-  ```
-  kubectl apply -f ./backstage-crb.yaml
-  ```
-
-- Deploy the hello-app application
-
-  ```
-  kubectl apply -f ./deploy-hello-app.yaml
-  ```
-
-- Add the Token to the environment variables
-
-  ```
-  export K8S_MINIKUBE_TOKEN=<token>
-  ```
-
-- To get the Kubernetes control plane info
-
-  ```
-  kubectl cluster-info
-  ```
-
-- Add the following snippet in the `app-config.yaml` file
-
-  ```
-  ...
   kubernetes:
     serviceLocatorMethod:
       type: 'multiTenant'
     clusterLocatorMethods:
     - type: 'config'
       clusters:
-        - url: <k8s-control-plane>
-          name: minikube
+        - url: <cluster-url>
+          name: <cluster-name>
           authProvider: 'serviceAccount'
           skipTLSVerify: true
           skipMetricsLookup: true
-          serviceAccountToken: ${K8S_MINIKUBE_TOKEN}
-  ```
-
-- To view the Minikube dashboard
-
-  ```
-  minikube dashboard
+          serviceAccountToken: ${CLUSTER_TOKEN}
   ```
 
 - Follow the [installation](https://backstage.io/docs/features/kubernetes/installation) steps
-- Add the following changes in the entity's `catalog-info.yaml` file
+  
+- Add the following in your entity's `catalog-info.yaml` file
 
   ```yaml title=catalog-info.yaml
      annotations:
@@ -208,10 +146,7 @@
        type: service
   ```
 
-### Add Quay Container Registry Plugin by Red Hat ([Backstage Marketplace](https://backstage.io/plugins/))
+### Add Red Hat's Topology Plugin ([Backstage Marketplace](https://backstage.io/plugins/))
 
-- Follow the steps [here](https://janus-idp.io/plugins/quay/) to integrate the front-end plugin in your Backstage instance
+- Follow the steps [here](https://janus-idp.io/plugins/topology/) to integrate the front-end plugin in your Backstage instance
   
-  - Add the following annotation in the `catalog-info.yaml` file
-
-    ```quay.io/repository-slug: janus-idp/backstage-showcase```
