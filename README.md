@@ -4,6 +4,35 @@
 
 - [pip3](https://www.activestate.com/resources/quick-reads/how-to-install-and-use-pip3/)
 
+### Set-up GitHub Integration ([Backstage GitHub integration guide](https://backstage.io/docs/getting-started/configuration#setting-up-a-github-integration))
+
+- Create your Personal Access Token by opening the [GitHub token creation page](https://github.com/settings/tokens/new)
+
+- Select the following and generate the token.
+  ```
+  read:org
+  read:user
+  user:email
+  repo
+  workflow
+  ```
+
+- Export your GitHub token
+
+  ```
+  export GITHUB_TOKEN=<your-github-token>
+  ```
+
+- Add the following snippet in the `app-config.local.yaml` file
+
+  ```
+  integrations:
+    ...
+    github:
+      - host: github.com
+        token: ${GITHUB_TOKEN} # This should be the token from GitHub which will look like ghp_urtokendeinfewinfiwebfweb
+  ```
+
 ### Adding a new component to the Software Catalog
 
 - Click on `Create` navigation item
