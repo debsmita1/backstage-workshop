@@ -33,13 +33,16 @@ data:
       clusterLocatorMethods:
         - type: 'config'
           clusters:
-            - name: minikube
-              url: ""
+            - name: ${CLUSTER_NAME}
+              URL: ${CLUSTER_URL}
               authProvider: 'serviceAccount'
               skipTLSVerify: true
-              serviceAccountToken: ""
+              serviceAccountToken: ${SERVICE_ACC_TOKEN}
 
     backend:
+      auth:
+         keys:
+          - secret: ${BACKEND_SECRET} # Execute in the terminal node -p 'require("crypto").randomBytes(24).toString("base64")'
       baseUrl: "<APPLICATION_HOST_URL>"
       listen:
         port: "<PORT>"
