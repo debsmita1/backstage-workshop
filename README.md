@@ -8,9 +8,9 @@
 
 - Click on `Create` navigation item
 
-- If you are starting from scratch, then select a template to get started:
+- Select a template to get started:
 
-  - To add more templates in the catalog, add the following URLs in the `app-config.yaml` under `catalog.locations` and re-start the app
+  - To add more templates in the catalog, add the following URL in the `app-config.yaml` under `catalog.locations` and re-start the app
 
     ```
     catalog:
@@ -27,7 +27,7 @@
   - Enter `This is a react application` in the Description field
   - Enter your name in the `owner` field
   - Enter `react-app` in the `Repository` field
-  - Add the following catalog entity URL in the `app-config.yaml` under `catalog.locations`
+  - Once the scaffolder repository is created go to the catalog-info.yaml file in your repository, and add the following catalog entity URL in the `app-config.yaml` under `catalog.locations`
 
     ```
     catalog:
@@ -52,12 +52,12 @@
 - Make the following change in the `app-config.yaml` and restart the app
 
   ```yaml app-config.yaml
-  techdocs:
-    builder: "local" # Alternatives - 'external'
-    generator:
-      runIn: "local" # Alternatives - 'local'
-    publisher:
-      type: "local" # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
+    techdocs:
+      builder: "local" # Alternatives - 'external'
+      generator:
+        runIn: "local" # Alternatives - 'local'
+      publisher:
+        type: "local" # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
   ```
 
 - Restart the app to view the documentation site
