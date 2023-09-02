@@ -3,6 +3,7 @@
 ### Prerequisites
 
 - [minikube](https://minikube.sigs.k8s.io/docs/start/)
+- [docker](https://docs.docker.com/engine/install/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [Helm CLI](https://helm.sh/docs/intro/install/)
 
