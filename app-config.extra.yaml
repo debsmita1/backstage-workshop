@@ -1,5 +1,5 @@
 app:
-  baseUrl: "http://localhost:3000"
+  baseUrl: "<APPLICATION_HOST_URL>"
   title: Backstage App
 organization:
   name: Xyz Company
@@ -7,39 +7,17 @@ integrations:
   github:
     - host: github.com
       token: ${GITHUB_TOKEN}
-kubernetes:
-  customResources:
-    - group: 'tekton.dev'
-      apiVersion: 'v1beta1'
-      plural: 'pipelines'
-    - group: 'tekton.dev'
-      apiVersion: 'v1beta1'
-      plural: 'pipelineruns'
-    - group: 'tekton.dev'
-      apiVersion: 'v1beta1'
-      plural: 'taskruns'
-    - group: 'route.openshift.io'
-      apiVersion: 'v1'
-      plural: 'routes'
-  serviceLocatorMethod:
-    type: 'multiTenant'
-  clusterLocatorMethods:
-    - type: 'config'
-      clusters:
-        - name: minikube
-          url: ""
-          authProvider: 'serviceAccount'
-          skipTLSVerify: true
-          serviceAccountToken: ""
-
 backend:
-  baseUrl: "http://localhost:3000"
+  auth:
+     keys:
+      - secret: ${BACKEND_SECRET} # Execute in the terminal node -p 'require("crypto").randomBytes(24).toString("base64")'
+  baseUrl: "<APPLICATION_HOST_URL>"
   listen:
-    port: 3000
+    port: "<APPLICATION_PORT>"
   csp:
     connect-src: ["'self'", 'http:', 'https:']
   cors:
-    origin: "http://localhost:3000"
+    origin: "<APPLICATION_HOST_URL>"
     methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
     credentials: true
   database:
