@@ -64,7 +64,7 @@
    
     2.7. Once the scaffolder repository is created go to the catalog-info.yaml file in your repository, and add the following catalog entity URL in the `app-config.yaml` under `catalog.locations`
 
-        ```
+        
         catalog:
           ...
           locations:
@@ -73,7 +73,7 @@
               target: https://github.com/debsmita1/react-app/blob/master/catalog-info.yaml # Replace this with your entity file URL
               rules:
                 - allow: [Component]
-        ```
+        
 
 
 ### Enabling TechDocs ([Backstage TechDocs configuration guide](https://backstage.io/docs/features/techdocs/getting-started))
