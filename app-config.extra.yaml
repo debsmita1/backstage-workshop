@@ -1,5 +1,5 @@
 app:
-  baseUrl: "<APPLICATION_HOST_URL>"
+  baseUrl: "http://localhost:7007"
   title: Backstage App
 organization:
   name: Xyz Company
@@ -11,13 +11,13 @@ backend:
   auth:
      keys:
       - secret: ${BACKEND_SECRET} # Execute in the terminal node -p 'require("crypto").randomBytes(24).toString("base64")'
-  baseUrl: "<APPLICATION_HOST_URL>"
+  baseUrl: "http://localhost:7007"
   listen:
-    port: "<APPLICATION_PORT>"
+    port: ":7007"
   csp:
     connect-src: ["'self'", 'http:', 'https:']
   cors:
-    origin: "<APPLICATION_HOST_URL>"
+    origin: "http://localhost:7007"
     methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
     credentials: true
   database:
