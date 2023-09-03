@@ -51,11 +51,17 @@
           rules:
             - allow: [Template]
       ```
+    
     2.2. Select the `Create React App Template`
+   
     2.3. Enter `backstage-workshop` in the `Name` field
+   
     2.4. Enter `This is a react application` in the Description field
+   
     2.5. Enter your name in the `owner` field
+   
     2.6. Enter `react-app` in the `Repository` field
+   
     2.7. Once the scaffolder repository is created go to the catalog-info.yaml file in your repository, and add the following catalog entity URL in the `app-config.yaml` under `catalog.locations`
 
         ```
