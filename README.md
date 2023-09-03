@@ -67,7 +67,7 @@
   helm install my-release backstage/backstage --values=values.yaml -n backstage-workshop
   ```
 
-- Run the following command in another terminal to view the `Backstage` application and update the base URLs in the `Config Map` resource
+- Run the following command in another terminal to view the `Backstage` application
 
   ```
   minikube service my-release-backstage -n backstage-workshop
