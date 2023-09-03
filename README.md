@@ -49,9 +49,8 @@
 
     6.1 Run the following command to apply the ConfigMap resource in this branch
   
-        ```
         kubectl create configmap my-app-config --from-file=app-config.extra.yaml=./local/path/to/your/app-config.extra.yaml -n backstage-workshop
-        ```
+
   
         or 
   
@@ -59,15 +58,15 @@
     
       Note: Every time you update the `ConfigMap` or the `Secret` resource after the Helm Chart is deployed, you need to restart the associated `Deployment` resource
 
-7. Create `values.yaml` file to pass the `Secret` and `ConfigMap` reference to the `Backstage` instance. Copy the contents of the `values.yaml` file in this branch
+8. Create `values.yaml` file to pass the `Secret` and `ConfigMap` reference to the `Backstage` instance. Copy the contents of the `values.yaml` file in this branch
 
-8. Run the following command to install the helm chart
+9. Run the following command to install the helm chart
 
     ```
     helm install my-release backstage/backstage --values=values.yaml -n backstage-workshop
     ```
 
-9. Run the following command in another terminal to view the `Backstage` application
+10. Run the following command in another terminal to view the `Backstage` application
 
     ```
     minikube service my-release-backstage -n backstage-workshop
