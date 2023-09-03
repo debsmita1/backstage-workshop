@@ -39,7 +39,7 @@
 
 2. Select a template to get started:
 
-  2.1. To add more templates in the catalog, add the following URL in the `app-config.yaml` under `catalog.locations` and re-start the app
+    2.1. To add more templates in the catalog, add the following URL in the `app-config.yaml` under `catalog.locations` and re-start the app
 
     ```
     catalog:
@@ -51,23 +51,23 @@
           rules:
             - allow: [Template]
       ```
-  2.2. Select the `Create React App Template`
-  2.3. Enter `backstage-workshop` in the `Name` field
-  2.4. Enter `This is a react application` in the Description field
-  2.5. Enter your name in the `owner` field
-  2.6 Enter `react-app` in the `Repository` field
-  2.7 Once the scaffolder repository is created go to the catalog-info.yaml file in your repository, and add the following catalog entity URL in the `app-config.yaml` under `catalog.locations`
+    2.2. Select the `Create React App Template`
+    2.3. Enter `backstage-workshop` in the `Name` field
+    2.4. Enter `This is a react application` in the Description field
+    2.5. Enter your name in the `owner` field
+    2.6. Enter `react-app` in the `Repository` field
+    2.7. Once the scaffolder repository is created go to the catalog-info.yaml file in your repository, and add the following catalog entity URL in the `app-config.yaml` under `catalog.locations`
 
-    ```
-    catalog:
-      ...
-      locations:
-        ...
-        - type: url
-          target: https://github.com/debsmita1/react-app/blob/master/catalog-info.yaml # Replace this with your entity file URL
-          rules:
-            - allow: [Component]
-    ```
+        ```
+        catalog:
+          ...
+          locations:
+            ...
+            - type: url
+              target: https://github.com/debsmita1/react-app/blob/master/catalog-info.yaml # Replace this with your entity file URL
+              rules:
+                - allow: [Component]
+        ```
 
 
 ### Enabling TechDocs ([Backstage TechDocs configuration guide](https://backstage.io/docs/features/techdocs/getting-started))
