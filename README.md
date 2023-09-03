@@ -39,9 +39,7 @@
 
     5.1 Convert your `Github token` to base64
   
-        ```
         echo -n 'your-token' | base64
-        ```
   
     5.2 Click on the `+` on the top-right in your `minikube`. Copy the contents of the `my-backstage-secrets.yaml` file in this branch and paste the `secret` resource yaml in the yaml editor. Replace the passwords with your base64 strings and hit Upload
 
@@ -52,9 +50,9 @@
         kubectl create configmap my-app-config --from-file=app-config.extra.yaml=./local/path/to/your/app-config.extra.yaml -n backstage-workshop
 
   
-        or 
+   or 
   
-       Click on the `+` on the top-right in your `minikube`. Copy the contents of the `my-app-config.yaml` file in this branch and paste the contents into the yaml editor. Add the base URL of the app, backend, and cors origin to the application host URL. Hit Upload.
+   Click on the `+` on the top-right in your `minikube`. Copy the contents of the `my-app-config.yaml` file in this branch and paste the contents into the yaml editor. Add the base URL of the app, backend, and cors origin to the application host URL. Hit Upload.
     
       Note: Every time you update the `ConfigMap` or the `Secret` resource after the Helm Chart is deployed, you need to restart the associated `Deployment` resource
 
