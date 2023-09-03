@@ -6,9 +6,9 @@
 
 ### Set-up GitHub Integration ([Backstage GitHub integration guide](https://backstage.io/docs/getting-started/configuration#setting-up-a-github-integration))
 
-- Create your Personal Access Token by opening the [GitHub token creation page](https://github.com/settings/tokens/new)
+1. Create your Personal Access Token by opening the [GitHub token creation page](https://github.com/settings/tokens/new)
 
-- Select the following and generate the token.
+2. Select the following and generate the token.
   ```
   read:org
   read:user
@@ -17,13 +17,13 @@
   workflow
   ```
 
-- Export your GitHub token
+3. Export your GitHub token
 
   ```
   export GITHUB_TOKEN=<your-github-token>
   ```
 
-- Add the following snippet in the `app-config.local.yaml` file
+4. Add the following snippet in the `app-config.local.yaml` file
 
   ```
   integrations:
@@ -35,11 +35,11 @@
 
 ### Adding a new component to the Software Catalog
 
-- Click on `Create` navigation item
+1. Click on `Create` navigation item
 
-- Select a template to get started:
+2. Select a template to get started:
 
-  - To add more templates in the catalog, add the following URL in the `app-config.yaml` under `catalog.locations` and re-start the app
+  2.1. To add more templates in the catalog, add the following URL in the `app-config.yaml` under `catalog.locations` and re-start the app
 
     ```
     catalog:
@@ -51,12 +51,12 @@
           rules:
             - allow: [Template]
       ```
-  - Select the `Create React App Template`
-  - Enter `backstage-workshop` in the `Name` field
-  - Enter `This is a react application` in the Description field
-  - Enter your name in the `owner` field
-  - Enter `react-app` in the `Repository` field
-  - Once the scaffolder repository is created go to the catalog-info.yaml file in your repository, and add the following catalog entity URL in the `app-config.yaml` under `catalog.locations`
+  2.2. Select the `Create React App Template`
+  2.3. Enter `backstage-workshop` in the `Name` field
+  2.4. Enter `This is a react application` in the Description field
+  2.5. Enter your name in the `owner` field
+  2.6 Enter `react-app` in the `Repository` field
+  2.7 Once the scaffolder repository is created go to the catalog-info.yaml file in your repository, and add the following catalog entity URL in the `app-config.yaml` under `catalog.locations`
 
     ```
     catalog:
@@ -72,13 +72,13 @@
 
 ### Enabling TechDocs ([Backstage TechDocs configuration guide](https://backstage.io/docs/features/techdocs/getting-started))
 
-- Run the following command to install `mkdocs-techdocs-core` package
+1. Run the following command to install `mkdocs-techdocs-core` package
 
   ```
   pip3 install mkdocs-techdocs-core
   ```
 
-- Make the following change in the `app-config.yaml` and restart the app
+2. Make the following change in the `app-config.yaml` and restart the app
 
   ```yaml app-config.yaml
     techdocs:
@@ -89,11 +89,11 @@
         type: "local" # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
   ```
 
-- Restart the app to view the documentation site
+3. Restart the app to view the documentation site
 
 ### Configuring Authentication in Backstage ([Backstage Authentication guide](https://backstage.io/docs/auth/))
 
-- To add GitHub authentication, create OAuth App from the GitHub [developer settings](https://github.com/settings/developers). Use the below values for setting up OAuth
+1. To add GitHub authentication, create OAuth App from the GitHub [developer settings](https://github.com/settings/developers). Use the below values for setting up OAuth
 
   ```
   Application name: Backstage // or your custom app name
@@ -101,7 +101,7 @@
   Authorization callback URL: http://localhost:7007/api/auth/github/handler/frame // should point to the Backstage Backend
   ```
 
-- Add the following block under the `auth` section in the `app-config.yaml` to configure the GitHub Provider
+2. Add the following block under the `auth` section in the `app-config.yaml` to configure the GitHub Provider
 
   ```yaml title=app-config.local.yaml
     auth:
@@ -113,7 +113,7 @@
             clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
   ```
 
-- Create the Sign-In Page. Make the following changes in the `App.tsx` file
+3. Create the Sign-In Page. Make the following changes in the `App.tsx` file
 
   ```tsx title=packages/app/src/App.tsx
 
@@ -146,7 +146,7 @@
 
 ### Add the Kubernetes Plugin ([Backstage Kubernetes Plugin](https://backstage.io/docs/features/kubernetes/))
 
-- Add the following configuration in the `app-config.yaml` file
+1. Add the following configuration in the `app-config.yaml` file
 
   ```
   kubernetes:
@@ -163,9 +163,9 @@
           serviceAccountToken: ${CLUSTER_TOKEN}
   ```
 
-- Follow the [installation](https://backstage.io/docs/features/kubernetes/installation) steps
+2. Follow the [installation](https://backstage.io/docs/features/kubernetes/installation) steps
   
-- Add the following in your entity's `catalog-info.yaml` file
+3. Add the following in your entity's `catalog-info.yaml` file
 
   ```yaml title=catalog-info.yaml
      annotations:
@@ -177,5 +177,5 @@
 
 ### Add Red Hat's Topology Plugin ([Backstage Marketplace](https://backstage.io/plugins/))
 
-- Follow the steps [here](https://janus-idp.io/plugins/topology/) to integrate the front-end plugin in your Backstage instance
+1. Follow the steps [here](https://janus-idp.io/plugins/topology/) to integrate the front-end plugin in your Backstage instance
   
