@@ -42,7 +42,6 @@
 
     2.1. To add more templates in the catalog, add the following URL in the `app-config.yaml` under `catalog.locations` and re-start the app
 
-        ```
         catalog:
           ...
           locations:
@@ -51,7 +50,6 @@
               target: https://github.com/backstage/backstage/blob/master/plugins/scaffolder-backend/sample-templates/remote-templates.yaml
               rules:
                 - allow: [Template]
-          ```
     
     2.2. Select the `Create React App Template`
    
