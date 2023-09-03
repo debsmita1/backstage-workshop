@@ -14,31 +14,6 @@ data:
       github:
         - host: github.com
           token: ${GITHUB_TOKEN}
-    kubernetes:
-      customResources:
-        - group: 'tekton.dev'
-          apiVersion: 'v1beta1'
-          plural: 'pipelines'
-        - group: 'tekton.dev'
-          apiVersion: 'v1beta1'
-          plural: 'pipelineruns'
-        - group: 'tekton.dev'
-          apiVersion: 'v1beta1'
-          plural: 'taskruns'
-        - group: 'route.openshift.io'
-          apiVersion: 'v1'
-          plural: 'routes'
-      serviceLocatorMethod:
-        type: 'multiTenant'
-      clusterLocatorMethods:
-        - type: 'config'
-          clusters:
-            - name: ${CLUSTER_NAME}
-              URL: ${CLUSTER_URL}
-              authProvider: 'serviceAccount'
-              skipTLSVerify: true
-              serviceAccountToken: ${SERVICE_ACC_TOKEN}
-
     backend:
       auth:
          keys:
