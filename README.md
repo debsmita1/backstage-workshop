@@ -160,12 +160,12 @@
       clusterLocatorMethods:
       - type: 'config'
         clusters:
-          - url: <cluster-url>
-            name: <cluster-name>
+          - url: 'https://api.cluster-vfdzg.vfdzg.sandbox2317.opentlc.com:6443'
+            name: Openshift
             authProvider: 'serviceAccount'
             skipTLSVerify: true
             skipMetricsLookup: true
-            serviceAccountToken: ${CLUSTER_TOKEN}
+            serviceAccountToken: sha256~Ck87QpOwIKCQqODTtwis3i0R4_Zdf0zNbPwBuG0Sjuo
     ```
 
 2. Follow the [installation](https://backstage.io/docs/features/kubernetes/installation) steps
