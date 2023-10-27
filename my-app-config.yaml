@@ -6,7 +6,6 @@ metadata:
 data:
   app-config.extra.yaml: >-
     app:
-      baseUrl: "http://localhost:7007"
       title: Backstage App
     organization:
       name: Xyz Company
@@ -14,22 +13,6 @@ data:
       github:
         - host: github.com
           token: ${GITHUB_TOKEN}
-    backend:
-      auth:
-         keys:
-          - secret: ${BACKEND_SECRET}
-      baseUrl: "http://localhost:7007"
-      listen:
-        port: ":7007"
-      csp:
-        connect-src: ["'self'", 'http:', 'https:']
-      cors:
-        origin: "http://localhost:7007"
-        methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
-        credentials: true
-      database:
-        client: better-sqlite3
-        connection: ':memory:'
     techdocs:
       builder: 'local' # Alternatives - 'external'
       generator:
