@@ -15,13 +15,13 @@
 
 3. Add the below script to configure the action in your instance:
 
-  3.1 Execute the following from `packages/backend` path:
-
-  ```yarn add @backstage/plugin-scaffolder-backend-module-github```
-
-  3.2 Add the following in `packages/backend/src/index.js`
-
-  ```backend.add(import('@backstage/plugin-scaffolder-backend-module-github'));```
+    3.1 Execute the following from `packages/backend` path:
+  
+    ```yarn add @backstage/plugin-scaffolder-backend-module-github```
+  
+    3.2 Add the following in `packages/backend/src/index.js`
+  
+    ```backend.add(import('@backstage/plugin-scaffolder-backend-module-github'));```
 
 4. Restart your application.
 
@@ -49,38 +49,43 @@
     1.1 Use the default template
 
     1.2 Use the (scaffolder-annotator-action)[https://github.com/janus-idp/backstage-plugins/tree/main/plugins/scaffolder-annotator-action] to annotate your entity object with current timestamp:
+   
 
       1.2.1 Install the annotator action
 
-        ```
-        yarn workspace backend add @janus-idp/backstage-scaffolder-backend-module-annotator
-        ```
-
+      ```
+      yarn workspace backend add @janus-idp/backstage-scaffolder-backend-module-annotator
+      ```
+  
       1.2.2 Add the following in your `packages/backend/src/index.ts` file to configure the annotator action:
+   
 
-        ```
-          const backend = createBackend();
+      ```
+        const backend = createBackend();
 
-          // highlight-add-start
-          backend.add(import('@janus-idp/backstage-scaffolder-backend-module-annotator'));
-          // highlight-add-end
+        // highlight-add-start
+        backend.add(import('@janus-idp/backstage-scaffolder-backend-module-annotator'));
+        // highlight-add-end
 
-          backend.start();
-        ```
+        backend.start();
+      ```
 
       1.2.3 Restart your app and verify the added action under `create/actions`.
 
       1.2.4 Add the following in your template yaml under `steps` after `Fetch Skeleton + Template`:
-        ```
-            steps:
-            ...
-            # this step is an example of using the `catalog:timestamping` action
-            - id: timestamp
-              name: Add Timestamp to catalog-info.yaml
-              action: catalog:timestamping
-        ```
+   
+ 
+      ```
+          steps:
+          ...
+          # this step is an example of using the `catalog:timestamping` action
+          - id: timestamp
+            name: Add Timestamp to catalog-info.yaml
+            action: catalog:timestamping
+      ```
 
     1.3 Add the `github:publish` action to publish the component skeleton in your desired repository
+   
 
     ```
     - id: publish
@@ -93,6 +98,7 @@
     ```
 
     1.4 Add the `catalog:register` action to register your component in the catalog
+   
 
     ```
     - id: register
@@ -104,15 +110,16 @@
     ```
 
     1.5 Add the output links
+   
 
     ```
     output:
-    links:
-      - title: Repository
-        url: ${{ steps.publish.output.remoteUrl }}
-      - title: Open in catalog
-        icon: catalog
-        entityRef: ${{ steps.register.output.entityRef }}
+      links:
+        - title: Repository
+          url: ${{ steps.publish.output.remoteUrl }}
+        - title: Open in catalog
+          icon: catalog
+          entityRef: ${{ steps.register.output.entityRef }}
     ```
 
     1.5 Create a yaml file with the name `nodejs-template.yaml` under `examples/template` and add the following content:
