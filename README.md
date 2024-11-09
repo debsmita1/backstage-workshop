@@ -1,186 +1,142 @@
-# Adding a component to the catalog
+# Software Templates ([Backstage Software Templates guide](https://backstage.io/docs/features/software-templates/))
 
-### Prerequisites
+1. Configure `Github` integration in your `app-config.yaml`
 
-- [pip3](https://www.activestate.com/resources/quick-reads/how-to-install-and-use-pip3/)
+2. Click on `Create` to list all the Software Templates configured in your Backstage instance.
 
-### Set-up GitHub Integration ([Backstage GitHub integration guide](https://backstage.io/docs/getting-started/configuration#setting-up-a-github-integration))
+### Try Example NodeJs Software Template
 
-1. Create your Personal Access Token by opening the [GitHub token creation page](https://github.com/settings/tokens/new)
+1. Select the `Example Node.js Template`.
 
-2. Select the following and generate the token.
-   
-  ```
-  read:org
-  read:user
-  user:email
-  repo
-  workflow
-  ```
+2. When you hit `Create` the `publish:github` action will fail because this template uses `publish:github` action which is not configured in your backstage instance yet.
 
-3. Export your GitHub token
+  Note: The actions registered in Backstage can be viewed under `/create/actions`
+  The Built-in actions can be found (here)[https://backstage.io/docs/features/software-templates/builtin-actions] 
+
+3. Add the below script to configure the action in your instance:
+
+  3.1 Execute the following from `packages/backend` path:
+
+  ```yarn add @backstage/plugin-scaffolder-backend-module-github```
+
+  3.2 Add the following in `packages/backend/src/index.js`
+
+  ```backend.add(import('@backstage/plugin-scaffolder-backend-module-github'));```
+
+4. Restart your application.
+
+
+### Add more templates
+
+1. To add more templates in the catalog, add the following in the `app-config.yaml` under `catalog.locations` and re-start the app
 
     ```
-    export GITHUB_TOKEN=<your-github-token>
-    ```
-
-4. Add the following snippet in the `app-config.local.yaml` file
-
-    ```
-    integrations:
+    catalog:
       ...
-      github:
-        - host: github.com
-          token: ${GITHUB_TOKEN} # This should be the token from GitHub which will look like ghp_urtokendeinfewinfiwebfweb
-    ```
-
-### Adding a new component to the Software Catalog
-
-1. Click on `Create` navigation item
-
-2. Select a template to get started:
-
-    2.1. To add more templates in the catalog, add the following URL in the `app-config.yaml` under `catalog.locations` and re-start the app
-
-        catalog:
-          ...
-          locations:
-            ...
-            - type: url
-              target: https://github.com/backstage/backstage/blob/master/plugins/scaffolder-backend/sample-templates/remote-templates.yaml
-              rules:
-                - allow: [Template]
-    
-    2.2. Select the `Create React App Template`
-   
-    2.3. Enter `backstage-workshop` in the `Name` field
-   
-    2.4. Enter `This is a react application` in the Description field
-   
-    2.5. Enter your name in the `owner` field
-   
-    2.6. Enter `react-app` in the `Repository` field
-   
-    2.7. Once the scaffolder repository is created go to the catalog-info.yaml file in your repository, and add the following catalog entity URL in the `app-config.yaml` under `catalog.locations`
-
-        
-        catalog:
-          ...
-          locations:
-            ...
-            - type: url
-              target: https://github.com/debsmita1/react-app/blob/master/catalog-info.yaml # Replace this with your entity file URL
-              rules:
-                - allow: [Component]
-        
-
-
-### Enabling TechDocs ([Backstage TechDocs configuration guide](https://backstage.io/docs/features/techdocs/getting-started))
-
-1. Run the following command to install `mkdocs-techdocs-core` package
-
-    ```
-    pip3 install mkdocs-techdocs-core
-    ```
-
-2. Make the following change in the `app-config.yaml` and restart the app
-
-    ```yaml app-config.yaml
-      techdocs:
-        builder: "local" # Alternatives - 'external'
-        generator:
-          runIn: "local" # Alternatives - 'local'
-        publisher:
-          type: "local" # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
-    ```
-
-3. Restart the app to view the documentation site
-
-### Configuring Authentication in Backstage ([Backstage Authentication guide](https://backstage.io/docs/auth/))
-
-1. To add GitHub authentication, create OAuth App from the GitHub [developer settings](https://github.com/settings/developers). Use the below values for setting up OAuth
-
-    ```
-    Application name: Backstage // or your custom app name
-    Homepage URL: http://localhost:3000 // should point to the Backstage Frontend
-    Authorization callback URL: http://localhost:7007/api/auth/github/handler/frame // should point to the Backstage Backend
-    ```
-
-2. Add the following block under the `auth` section in the `app-config.yaml` to configure the GitHub Provider
-
-    ```yaml title=app-config.local.yaml
-      auth:
-        environment: development
-        providers:
-          github:
-            development:
-              clientId: ${AUTH_GITHUB_CLIENT_ID}
-              clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
-    ```
-
-3. Create the Sign-In Page. Make the following changes in the `App.tsx` file
-
-    ```tsx title=packages/app/src/App.tsx
-  
-      import { githubAuthApiRef } from '@backstage/core-plugin-api';
-      import { SignInPage } from '@backstage/core-components';
-  
-      const app = createApp({
+      locations:
         ...
-        components: {
-          SignInPage: props => (
-            <SignInPage
-              {...props}
-              auto
-                providers={[
-                    'guest',
-                  {
-                  id: 'github-auth-provider',
-                  title: 'GitHub',
-                  message: 'Sign in using GitHub',
-                  apiRef: githubAuthApiRef,
-                  },
-                ]}
-              />
-           ),
-          },
-        ...
-      });
-  
+        - type: url
+          target: https://github.com/backstage/backstage/blob/master/plugins/scaffolder-backend/sample-templates/remote-templates.yaml
+          rules:
+            - allow: [Template]
     ```
 
-### Add the Kubernetes Plugin ([Backstage Kubernetes Plugin](https://backstage.io/docs/features/kubernetes/))
 
-1. Add the following configuration in the `app-config.yaml` file
+### Create your own Software Template
+
+1. Click on the Template (editor)[https://demo.backstage.io/create/template-form] to start building your own Software Template.
+
+    1.1 Use the default template
+
+    1.2 Use the (scaffolder-annotator-action)[https://github.com/janus-idp/backstage-plugins/tree/main/plugins/scaffolder-annotator-action] to annotate your entity object with current timestamp:
+
+      1.2.1 Install the annotator action
+
+        ```
+        yarn workspace backend add @janus-idp/backstage-scaffolder-backend-module-annotator
+        ```
+
+      1.2.2 Add the following in your `packages/backend/src/index.ts` file to configure the annotator action:
+
+        ```
+          const backend = createBackend();
+
+          // highlight-add-start
+          backend.add(import('@janus-idp/backstage-scaffolder-backend-module-annotator'));
+          // highlight-add-end
+
+          backend.start();
+        ```
+
+      1.2.3 Restart your app and verify the added action under `create/actions`.
+
+      1.2.4 Add the following in your template yaml under `steps` after `Fetch Skeleton + Template`:
+        ```
+            steps:
+            ...
+            # this step is an example of using the `catalog:timestamping` action
+            - id: timestamp
+              name: Add Timestamp to catalog-info.yaml
+              action: catalog:timestamping
+        ```
+
+    1.3 Add the `github:publish` action to publish the component skeleton in your desired repository
 
     ```
-    kubernetes:
-      serviceLocatorMethod:
-        type: 'multiTenant'
-      clusterLocatorMethods:
-      - type: 'config'
-        clusters:
-          - URL: <KUBERNETES_URL>
-            name: <NAME>
-            authProvider: 'serviceAccount'
-            skipTLSVerify: true
-            skipMetricsLookup: true
-            serviceAccountToken: <KUBERNETES_TOKEN>
+    - id: publish
+      name: Publish the component in a new repository
+      action: publish:github
+      input:
+        allowedHosts: ["github.com"]
+        description: This is ${{ parameters.name }}
+        repoUrl: ${{ parameters.repoUrl }}
     ```
 
-2. Follow the [installation](https://backstage.io/docs/features/kubernetes/installation) steps
-  
-3. Add the following in your entity's `catalog-info.yaml` file
+    1.4 Add the `catalog:register` action to register your component in the catalog
 
-    ```yaml title=catalog-info.yaml
-       annotations:
-         ...
-         backstage.io/kubernetes-id: backstage-workshop
-       spec:
-         type: service
+    ```
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: "/catalog-info.yaml"
     ```
 
-### Add Red Hat's Topology Plugin ([Backstage Marketplace](https://backstage.io/plugins/))
+    1.5 Add the output links
 
-1. Follow the steps [here](https://janus-idp.io/plugins/topology/) to integrate the front-end plugin in your Backstage instance
-  
+    ```
+    output:
+    links:
+      - title: Repository
+        url: ${{ steps.publish.output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps.register.output.entityRef }}
+    ```
+
+    1.5 Create a yaml file with the name `nodejs-template.yaml` under `examples/template` and add the following content:
+
+    ```
+    apiVersion: scaffolder.backstage.io/v1beta3
+    kind: Template
+    metadata:
+      name: My-nodejs-template
+      title: Node.js Template
+      description: A template for the scaffolder that creates a simple Node.js service
+    spec:
+      owner: user:guest
+      type: service
+      parameters:
+        ....
+    ```
+
+    1.6 Update the Fetch Base `input.url` to 
+
+    ```
+    input:
+        url: ./content
+    ```
+
+
+3. Add the location of your template YAML in your `catalog.locations`. Restart the app to view the newly added software template in your catalog.
