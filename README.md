@@ -19,7 +19,7 @@
   
     ```yarn add @backstage/plugin-scaffolder-backend-module-github```
   
-    3.2 Add the following in `packages/backend/src/index.js`
+    3.2 Add the following in `packages/backend/src/index.ts`
   
     ```backend.add(import('@backstage/plugin-scaffolder-backend-module-github'));```
 
